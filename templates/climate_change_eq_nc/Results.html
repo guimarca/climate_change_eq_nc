@@ -1,0 +1,76 @@
+{% extends "climate_change_eq_nc/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Resultados
+{% endblock %}
+
+{% block content %}
+    <div class="pull-right label label-default" style="font-size:12pt">
+        Ronda {{ player.round_number }} de {{ Constants.num_rounds }}
+    </div>
+
+    Eres el jugador <b>{{ player.player_id }}</b>
+    <br>
+    <br>
+    En la tabla estás resaltado/a en <span style="color: red">rojo</span>.
+    <br>
+
+    <div class="visible-xs visible-sm">
+        <br>
+        <small>* Haz scroll hacia la derecha para ver la tabla completa</small>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10">
+            <table class="table table-bordered" style="margin-top:20px;">
+                <tr>
+                    <th>Jugador</th>
+                    <th class="text-center">Capital<br> inicial</th>
+                    <th class="text-center">Contribución<br> ronda</th>
+                    <th class="text-center">Beneficio<br> privado</th>
+                    <th class="text-center">Total fondo<br> privado</th>
+                </tr>
+            {% for p in group.get_players %}
+                <tr style="
+                        {% if p.role == Constants.TYPE_POOR %} background-color: #e8e8e8; {% endif %}
+                        {% if p.id_in_group == player.id_in_group %} color: red; {% endif %}
+                    ">
+                    <td>{{ p.player_id }}</td>
+                    <td class="text-center">{{ p.endowment }}</td>
+                    <td class="text-center">{{ p.a }}</td>
+                    <td class="text-center">{{ p.profit }}</td>
+                    <td class="text-center">{{ p.private_fund }}</td>
+                </tr>
+            {% endfor %}
+
+                <tr>
+                    <td colspan="2" class="text-right">TOTAL</td>
+                    <td class="text-center">{{ group.total_contribution }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <h4>Objetivo</h4>
+            <div class="well">
+                <h4>{{ Constants.tau }}</h4>
+            </div>
+
+
+            <h4>Fondo de prevención</h4>
+            <div class="well">
+                <h4>{{ group.prevention_fund }}</h4>
+            </div>
+        </div>
+    </div>
+
+
+
+    {% next_button %}
+
+
+    {% include Constants.instructions_template %}
+
+
+{% endblock %}

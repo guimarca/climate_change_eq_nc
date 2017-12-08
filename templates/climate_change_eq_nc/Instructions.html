@@ -1,0 +1,117 @@
+{% load otree_tags staticfiles %}
+
+<div class="well">
+
+    <h3 class="panel-sub-heading">
+        Instrucciones
+    </h3>
+
+    <p>
+        Al principio del experimento se te asignará aleatoriamente un número de jugador y un tipo, <b>A</b> o <b>B</b>.
+        Tu identificador de jugador estará formado por tu tipo y un número, por ejemplo <b>A1</b> o <b>B1</b>.
+        Además, se te asignará aleatoriamente a un grupo de {{ Constants.players_per_group }} jugadores,
+        donde habrá {{ Constants.num_poor_players }} jugadores tipo A (A1, A2, A3 y A4) y
+        {{ Constants.num_rich_players }} jugadores tipo B (B1 y B2).
+        Recibirás un capital inicial de <b>{{ Constants.endowment_initial_poor|floatformat:0 }} puntos si eres A</b>
+        o de <b>{{ Constants.endowment_initial_rich|floatformat:0 }} puntos si eres B</b>.
+        El experimento durará {{ Constants.num_rounds }} rondas.
+        <b>Tu número de jugador, tu tipo y el grupo en el que estés no cambiarán a lo largo de todo el experimento</b>.
+
+    </p>
+    <p>
+        En cada ronda recibirás como dotación  una parte de tu capital inicial:
+        <b>si eres A tendrás {{ Constants.endowment_round_poor|floatformat:0 }} puntos</b>
+        y <b>si eres B tendrás {{ Constants.endowment_round_rich|floatformat:0 }} puntos</b>.
+        De esa dotación, tienes la posibilidad de realizar una contribución para evitar una catástrofe climática.
+        La parte de tu dotación que no contribuyas para evitar la catástrofe te generará unos <b>beneficios individuales</b>.
+        Los beneficios individuales de cada ronda se te irán acumulando en un fondo privado.
+    </p>
+
+    <p>
+        Al final de las 10 rondas, si el total acumulado en el fondo de prevención
+        es de almenos <b>{{ Constants.tau|floatformat:0 }}</b>, la catástrofe se evitará. En ese caso,
+        tus ganancias en el experimento serán el total que tengas acumulado en tu fondo privado.
+    </p>
+    <p>
+        Si el fondo de prevención no llega a esa cantidad, ocurrirá una catástrofe climática con una
+        probabilidad del <b>{{ Constants.p_pctg|floatformat:0 }}%</b>.
+        En ese caso, el fondo privado de todos los jugadores del grupo pasará a ser 0.
+    </p>
+    <p>
+        Si no ocurre la catástrofe (con una probabilidad del <b>{{ Constants.one_minus_p_pctg|floatformat:0 }}%</b>),
+        tus ganancias en el experimento serán el total que tengas acumulado en tu fondo privado
+        (igual que si se evita la catástrofe).
+    </p>
+    <p>
+        A continuación te presentamos una ronda de ejemplo.
+    </p>
+    <p>
+        <br>
+        <h4>Ejemplo</h4>
+
+        Las decisiones en tu grupo han sido las siguientes:
+
+        <br>
+        <br>
+
+
+        <div class="row">
+            <div class="col-md-4">
+
+                <table class="table table-bordered" style="background-color: white">
+                    <tr>
+                        <th>Jugador</th>
+                        <th>Contribución <br>al fondo <br>de prevención</th>
+                    </tr>
+
+                    <tr style="background-color: #e8e8e8">
+                        <td>A1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr style="background-color: #e8e8e8">
+                        <td>A2</td>
+                        <td>1</td>
+                    </tr>
+                    <tr style="background-color: #e8e8e8">
+                        <td>A3</td>
+                        <td>0</td>
+                    </tr>
+                    <tr style="background-color: #e8e8e8">
+                        <td>A4</td>
+                        <td>3</td>
+                    </tr>
+
+                    <tr>
+                        <td>B1</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>B2</td>
+                        <td>3</td>
+                    </tr>
+
+                    <tr>
+                        <td>TOTAL</td>
+                        <td>14</td>
+                    </tr>
+                </table>
+            </div>
+
+
+            <div class="col-md-8">
+                <b>Caso 1:</b> Eres el Jugador <b>A2</b>, por tanto, tienes una dotación de 2 puntos en esta ronda.
+                Has contribuido con 1 punto al fondo de prevención. Los beneficios para tu fondo privado en esta
+                ronda son iguales a: 3 – 1 = <b>2</b>
+                <hr>
+
+
+                <b>Caso 2:</b> Eres el Jugador <b>B1</b>, por tanto, tienes una dotación de 8 puntos en esta ronda.
+                Has contribuido con 6 puntos al fondo de prevención. Los beneficios para tu fondo privado en esta
+                ronda son iguales a: 6 – 5 = <b>1</b>
+
+            </div>
+        </div>
+    </p>
+
+</div>
+

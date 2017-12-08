@@ -1,0 +1,140 @@
+{% extends "climate_change_ineq_nc/Base.html" %}
+{% load staticfiles otree_tags %}
+
+
+
+{% block title %}
+    Resultados de las preguntas de comprensión
+{% endblock %}
+
+{% block content %}
+
+    <p>
+        <b>1. </b> Las decisiones de inversión en tu grupo en esta ronda han sido las siguientes:
+    </p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Jugador</th>
+                    <th>Contribución <br>al fondo <br>de prevención</th>
+                    <th>Inversión<br>privada</th>
+                </tr>
+                <tr style="background-color: #e8e8e8">
+                    <td>A1</td>
+                    <td>0</td>
+                    <td>2</td>
+                </tr>
+                <tr style="background-color: #e8e8e8">
+                    <td>A2</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr style="background-color: #e8e8e8">
+                    <td>A3</td>
+                    <td>2</td>
+                    <td>0</td>
+                </tr>
+                <tr style="background-color: #e8e8e8">
+                    <td>A4</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>B1</td>
+                    <td>1</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>B2</td>
+                    <td>5</td>
+                    <td>3</td>
+                </tr>
+            </table>
+        </div>
+
+
+        <b>{{ q1_1_quest }}</b>
+        <br>
+        <br>
+        <div class="col-md-8">
+            <div class="alert alert-{{ q1_1_class }}">
+                <b>{{ q1_1_msg }}</b>
+                <br>
+                Solución = {{ q1_1_sol }}
+                <br>Tu respuesta = {{ player.q1_1 }}
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <b>{{ q1_2_quest }}</b>
+        <br>
+        <br>
+        <div class="col-md-8">
+            <div class="alert alert-{{ q1_2_class }}">
+                <b>{{ q1_2_msg }}</b>
+                <br>
+                Solución = {{ q1_2_sol }}
+                <br>Tu respuesta = {{ player.q1_2 }}
+            </div>
+        </div>
+    </div>
+
+
+    <hr>
+
+    <p>
+        <b>2. </b> La suma total del fondo de prevención al terminar
+        el experimento está <b>por debajo de {{ Constants.tau|floatformat:0 }}</b>, y por tanto la
+        catástrofe <b>no se evita</b>. Entonces, la catástrofe ocurrirá con una probabilidad
+        del <b>{{ Constants.p_pctg }}%</b>. Si tienes acumulados en tu fondo privado 100 puntos:
+    </p>
+    <div class="row">
+        <div class="col-md-5">
+            <b>{{ q2_1_quest }}</b>
+            <br>
+            <br>
+            <div class="alert alert-{{ q2_1_class }}">
+                <b>{{ q2_1_msg }}</b>
+                <br>
+                Solución = {{ q2_1_sol }}
+                <br>Tu respuesta = {{ player.q2_1 }}
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <b>{{ q2_2_quest }}</b>
+            <br>
+            <br>
+            <div class="alert alert-{{ q2_2_class }}">
+                <b>{{ q2_2_msg }}</b>
+                <br>
+                Solución = {{ q2_2_sol }}
+                <br>Tu respuesta = {{ player.q2_2 }}
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <p>
+        <b>{{ q3_quest }}</b>
+        <br>
+        <br>
+        <div class="alert alert-{{ q3_class }}">
+            <b>{{ q3_msg }}</b>
+            <br>
+            Solución = {{ q3_sol }}
+            <br>Tu respuesta = {{ q3_respuesta }}
+        </div>
+    </p>
+    
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
+

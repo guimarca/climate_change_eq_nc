@@ -1,0 +1,31 @@
+{% extends "climate_change_eq_nc/Base.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Contribución
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="pull-right label label-default" style="font-size:12pt">
+        Ronda {{ player.round_number }} de {{ Constants.num_rounds }}
+    </div>
+
+    Eres el jugador <b>{{ player.player_id }}</b>
+    <br>
+    <br>
+    Te quedan <b>{{ player.endowment }}</b> para invertir de los <b>{{ player.endowment_initial }}</b>
+    que tenías inicialmente.
+
+    <br>
+    <br>
+
+    {% formfield player.a with label="¿Cuánto quieres contribuir al fondo de prevención del cambio climático?" %}
+
+
+    {% next_button %}
+
+    {% include Constants.instructions_template %}
+
+{% endblock %}
